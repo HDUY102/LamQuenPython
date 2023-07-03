@@ -1,4 +1,5 @@
 import math
+# GIải ptb2
 
 
 def input_data():

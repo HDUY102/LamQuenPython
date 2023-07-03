@@ -1,3 +1,4 @@
+# Gọi hàm tính tổng 2 số thực a,b
 def InputData():
     print("nhap 2 so a,b: \n")
     a = float(input("a= "))

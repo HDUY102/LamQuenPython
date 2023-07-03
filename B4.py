@@ -1,3 +1,4 @@
+# TÍnh giai thừa của số n
 def inputData():
     n = int(input("nhap n= "))
     return n
