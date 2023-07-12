@@ -48,8 +48,10 @@ def ViewMatrix(G, n):
             print("%d" % G[i][j], end=' ')
         print()
 
+# Duyệt theo chiều rộng
 
-def Breadth_First_Search(G, P, n, s, g):
+
+def BFS(G, P, n, s, g):
     Open = []
     Close = []
     for j in range(n + 3):
@@ -69,6 +71,32 @@ def Breadth_First_Search(G, P, n, s, g):
             if G[u][v] != 0 and not Check(Open, n, v) and not Check(Close, n, v):
                 rear = rear + 1
                 Open[rear] = v
+                P[v] = u
+        Close[u] = u
+    return 0
+
+# Duyệt theo chiều sâu
+
+
+def DFS(G, P, n, s, g):
+    Open = []
+    Close = []
+    for j in range(n + 3):
+        Open.append(0)
+        Close.append(0)
+        P.append(0)
+    top = 1
+    Open[top] = s
+    P[s] = s
+    while (top > 0):
+        u = Open[top]
+        top = top - 1
+        if u == g:
+            return 1
+        for v in range(1, n + 1):
+            if G[u][v] != 0 and not Check(Open, n, v) and not Check(Close, n, v):
+                top = top + 1
+                Open[top] = v
                 P[v] = u
         Close[u] = u
     return 0
@@ -97,7 +125,9 @@ def Print(P, n, s, g):
 
 def main():
     n, s, g = Init("kogiantrangthai1.inp", G)
-    Breadth_First_Search(G, P, n, s, g)
+    print("Xem ma trận G: %d" % g, end='\n')
+    ViewMatrix(G, n)
+    DFS(G, P, n, s, g)
     Print(P, n, s, g)
 
 
