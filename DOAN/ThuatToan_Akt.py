@@ -1,54 +1,50 @@
-def ThapHN(n, A, B, C):
-    if n == 1:
-        print(f"Move disk 1 from {A} to {B}")
-        return
-    ThapHN(n - 1, A, C, B)
-    print(f"Move disk {n} from {A} to {B}")
-    ThapHN(n - 1, C, B, A)
+def nhanMaTran(matrix1, matrix2):
+    rows1, cols1 = len(matrix1), len(matrix1[0])
+    rows2, cols2 = len(matrix2), len(matrix2[0])
+
+    if cols1 != rows2:
+        raise ValueError("Ma trận không hợp lệ.")
+
+    result = [[0 for _ in range(cols2)] for _ in range(rows1)]
+
+    for i in range(rows1):
+        for j in range(cols2):
+            for k in range(cols1):
+                result[i][j] += matrix1[i][k] * matrix2[k][j]
+
+    return result
 
 
-def Check(M, n, u):
-    for i in range(1, n + 1):
-        if M[i] == u:
-            return True
-    return False
+def chuyenViTriMaTran(matrix):
+    rows, cols = len(matrix), len(matrix[0])
+    transposed = [[0 for _ in range(rows)] for _ in range(cols)]
+
+    for i in range(rows):
+        for j in range(cols):
+            transposed[j][i] = matrix[i][j]
+
+    return transposed
 
 
-def Print(P, n, s, g):
-    Path = []
-    for i in range(0, n + 1):
-        Path.append(0)
-    print("\nĐường đi từ %d đến %d là\n" % (s, g), end=' ')
-    Path[0] = g
-    i = P[g]
-    k = 1
-    while i != s:
-        Path[k] = i
-        k = k + 1
-        i = P[i]
-    Path[k] = s
-    for j in range(0, k + 1):
-        i = k - j
+def power_of_matrix_with_transpose(matrix, k):
+    rows, cols = len(matrix), len(matrix[0])
+    if rows != cols:
+        raise ValueError("Lỗi.")
+
+    if k == 1:
+        return matrix
+
+    transposed_matrix = chuyenViTriMaTran(matrix)
+    result = matrix
+
+    for _ in range(k - 1):
+        result = nhanMaTran(result, transposed_matrix)
+
+    return result
 
 
-def main():
-    try:
-        num_disks = int(input("Nhập đĩa: "))
-        if num_disks <= 0:
-            print("Number of disks should be a positive integer.")
-            return
-    except ValueError:
-        print("Invalid input. Please enter a valid integer for the number of disks.")
-        return
-
-    n = num_disks
-    G = []
-    P = [0]
-
-    s = 1
-    g = n
-    ThapHN(n, 'A', 'C', 'B')
-
-
-if __name__ == '__main__':
-    main()
+# Ví dụ
+matrix = [[2, 1], [1, 1]]
+k = 3
+result = power_of_matrix_with_transpose(matrix, k)
+print(result)
