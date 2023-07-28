@@ -27,9 +27,9 @@ def breadth_first_search(start_node):
 # Example of using the algorithm
 
 
-A = Node("A", "Proposition", [])
-B = Node("B", "Proposition", [])
-C = Node("C", "Proposition", [])
+A = Node("B", "Proposition", [])
+B = Node("C", "Proposition", [])
+C = Node("A", "Proposition", [])
 
 Or_node = Node("Or", "Or", [B, C])
 And_node = Node("And", "And", [A, Or_node])

@@ -39,7 +39,6 @@ def a_star(start_state, goal_state, get_neighbors_fn, heuristic_fn):
 
             g_score = current_node.g_score + 1
             h_score = heuristic_fn(neighbor_state, goal_state)
-            # f_score = g_score + h_score
 
             neighbor_node = Node(
                 neighbor_state, current_node, g_score, h_score)
@@ -49,14 +48,11 @@ def a_star(start_state, goal_state, get_neighbors_fn, heuristic_fn):
 
     return None
 
-# Example of using the function
-# Hàm heuristic ước tính khoảng cách từ trạng thái hiện tại đến trạng thái kết thúc (Manhattan distance)
+# Ví dụ
 
 
 def heuristic(state, goal_state):
     return abs(state[0] - goal_state[0]) + abs(state[1] - goal_state[1])
-
-# Hàm trả về các trạng thái hàng xóm của một trạng thái
 
 
 def get_neighbors(state):
